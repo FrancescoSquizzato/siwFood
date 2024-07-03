@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		New Ricetta
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${userDetails}">
+			<span th:text="${userDetails.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${user}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+	<h1>Aggiungi una ricetta</h1>
+	<form th:action="@{/admin/ricetta}" method="POST" th:object="${ricetta}">
+  		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
+		
+		<div>
+			<label>Nome:</label> 
+			<span><input type="text" th:field="${ricetta.nome}" /></span>
+		    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
+		    </span>
+		</div>
+
+		<div>
+			<label>Descrizione:</label> <span><input type="text" th:field="${ricetta.descrizione}" /></span>
+		    <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}">
+		    </span>
+		</div>
+
+		<div>
+			<label>URL immagine:</label> <span><input type="text" th:field="${ricetta.urlImage}" /></span>
+		</div>
+		
+		<div>
+			<span><button type="submit">Conferma</button></span>
+		</div>
+	</form>
+</body>
+
+</html>

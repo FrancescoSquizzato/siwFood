@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title th:text="${ricetta.nome}"></title>
+	</head>
+	<body>
+		<div th:if="${ricetta}">
+		        <span th:text="${ricetta.nome}"></span>
+		        <span th:text="'(' + ${ricetta.descrizione} + ')'"></span> <br>
+		        <span><img width="20%" th:src=${ricetta.urlImage} /></span>
+		    </div>
+		    <div th:unless="${ricetta}">Non esiste</div>
+	</body>
+</html>
